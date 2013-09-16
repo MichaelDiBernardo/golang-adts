@@ -3,8 +3,8 @@ package rational
 import "fmt"
 
 type Rational struct {
-	Numerator   int
-	Denominator int
+	n int
+	d int
 }
 
 func New(num int, denom int) *Rational {
@@ -12,17 +12,25 @@ func New(num int, denom int) *Rational {
 	return &Rational{num / reduced_denom, denom / reduced_denom}
 }
 
+func (self *Rational) Numerator() int {
+    return self.n
+}
+
+func (self *Rational) Denominator() int {
+    return self.d
+}
+
 func (self *Rational) String() string {
-	return fmt.Sprintf("%d/%d", self.Numerator, self.Denominator)
+	return fmt.Sprintf("%d/%d", self.n, self.d)
 }
 
 func (self *Rational) Equal(other *Rational) bool {
-	return self.Numerator == other.Numerator && self.Denominator == other.Denominator
+	return self.n == other.n && self.d == other.d
 }
 
 func (self *Rational) Add(other *Rational) *Rational {
-	new_numerator := self.Numerator*other.Denominator + self.Denominator*other.Numerator
-	new_denominator := self.Denominator * other.Denominator
+	new_numerator := self.n*other.d + self.d*other.n
+	new_denominator := self.d * other.d
 	return New(new_numerator, new_denominator)
 }
 
