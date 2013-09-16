@@ -2,10 +2,11 @@ package rational
 
 import "fmt"
 
-type Rational struct {
-	n int
-	d int
-}
+// Completely change the representation - tests don't break!
+type Rational [2]int
+
+const n_i = 0;
+const d_i = 1;
 
 func New(num int, denom int) *Rational {
 	reduced_denom := gcd(num, denom)
@@ -13,24 +14,24 @@ func New(num int, denom int) *Rational {
 }
 
 func (self *Rational) Numerator() int {
-    return self.n
+    return self[n_i]
 }
 
 func (self *Rational) Denominator() int {
-    return self.d
+    return self[d_i]
 }
 
 func (self *Rational) String() string {
-	return fmt.Sprintf("%d/%d", self.n, self.d)
+	return fmt.Sprintf("%d/%d", self[n_i], self[d_i])
 }
 
 func (self *Rational) Equal(other *Rational) bool {
-	return self.n == other.n && self.d == other.d
+	return self[n_i] == other[n_i] && self[d_i] == other[d_i]
 }
 
 func (self *Rational) Add(other *Rational) *Rational {
-	new_numerator := self.n*other.d + self.d*other.n
-	new_denominator := self.d * other.d
+	new_numerator := self[n_i]*other[d_i] + self[d_i]*other[n_i]
+	new_denominator := self[d_i] * other[d_i]
 	return New(new_numerator, new_denominator)
 }
 
