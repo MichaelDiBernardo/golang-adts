@@ -57,13 +57,13 @@ func TestAddWithoutReduce(t *testing.T) {
 }
 
 func CreateReducibleFraction(t *testing.T) {
-    rat := rational.New(10, 18)
-    if rat.Numerator != 5 {
-        t.Errorf("Numerator did not reduce! E - 5, A - %d", rat.Numerator)
-    }
-    if rat.Denominator != 9 {
-        t.Errorf("Denominator did not reduce! E - 9, A - %d", rat.Denominator)
-    }
+	rat := rational.New(10, 18)
+	if rat.Numerator != 5 {
+		t.Errorf("Numerator did not reduce! E - 5, A - %d", rat.Numerator)
+	}
+	if rat.Denominator != 9 {
+		t.Errorf("Denominator did not reduce! E - 9, A - %d", rat.Denominator)
+	}
 }
 
 func TestAddWithReduce(t *testing.T) {
@@ -75,3 +75,9 @@ func TestAddWithReduce(t *testing.T) {
 		t.Errorf("Sum to irreducible fraction: E - %s, A - %s", expected.String(), sum.String())
 	}
 }
+
+//func TestAddNotUsingPointers(t *testing.T) {
+//	first, second := rational.Rational{1, 2}, rational.Rational{3, 4}
+//    sum := first.Add(second)
+//    t.Errorf(sum.String())
+//}

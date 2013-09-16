@@ -8,7 +8,7 @@ type Rational struct {
 }
 
 func New(num int, denom int) *Rational {
-    reduced_denom := gcd(num, denom)
+	reduced_denom := gcd(num, denom)
 	return &Rational{num / reduced_denom, denom / reduced_denom}
 }
 
