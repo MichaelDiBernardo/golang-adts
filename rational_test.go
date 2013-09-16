@@ -81,3 +81,15 @@ func TestAddWithReduce(t *testing.T) {
 //    sum := first.Add(second)
 //    t.Errorf(sum.String())
 //}
+
+//func TestReassignmentOfValueObj(t *testing.T) {
+//	rat := rational.New(10, 18)
+//	if rat.Numerator != 5 {
+//		t.Errorf("Numerator did not reduce! E - 5, A - %d", rat.Numerator)
+//	}
+//	if rat.Denominator != 9 {
+//		t.Errorf("Denominator did not reduce! E - 9, A - %d", rat.Denominator)
+//	}
+//    rat.Denominator = 42
+//    t.Errorf(rat.String())
+//}
