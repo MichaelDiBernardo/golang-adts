@@ -7,23 +7,24 @@ import (
 
 func TestCreateRational(t *testing.T) {
 	rat := rational.New(1, 2)
-	if rat.Numerator != 1 {
-		t.Errorf("Numerator not 1! %d", rat.Numerator)
+	if rat.Numerator() != 1 {
+		t.Errorf("Numerator not 1! %d", rat.Numerator())
 	}
-	if rat.Denominator != 2 {
-		t.Errorf("Denominator not 2! %d", rat.Denominator)
+	if rat.Denominator() != 2 {
+		t.Errorf("Denominator not 2! %d", rat.Denominator())
 	}
 }
 
-func TestDodgeConstructor(t *testing.T) {
-	rat := rational.Rational{1, 2}
-	if rat.Numerator != 1 {
-		t.Errorf("Numerator not 1! %d", rat.Numerator)
-	}
-	if rat.Denominator != 2 {
-		t.Errorf("Denominator not 2! %d", rat.Denominator)
-	}
-}
+// Can't do this!
+//func TestDodgeConstructor(t *testing.T) {
+//	rat := rational.Rational{1, 2}
+//	if rat.Numerator != 1 {
+//		t.Errorf("Numerator not 1! %d", rat.Numerator)
+//	}
+//	if rat.Denominator != 2 {
+//		t.Errorf("Denominator not 2! %d", rat.Denominator)
+//	}
+//}
 
 func TestString(t *testing.T) {
 	rat := rational.New(1, 2)
@@ -58,10 +59,10 @@ func TestAddWithoutReduce(t *testing.T) {
 
 func CreateReducibleFraction(t *testing.T) {
 	rat := rational.New(10, 18)
-	if rat.Numerator != 5 {
+	if rat.Numerator() != 5 {
 		t.Errorf("Numerator did not reduce! E - 5, A - %d", rat.Numerator)
 	}
-	if rat.Denominator != 9 {
+	if rat.Denominator() != 9 {
 		t.Errorf("Denominator did not reduce! E - 9, A - %d", rat.Denominator)
 	}
 }
@@ -82,6 +83,7 @@ func TestAddWithReduce(t *testing.T) {
 //    t.Errorf(sum.String())
 //}
 
+// Can't do this!
 //func TestReassignmentOfValueObj(t *testing.T) {
 //	rat := rational.New(10, 18)
 //	if rat.Numerator != 5 {
@@ -90,6 +92,6 @@ func TestAddWithReduce(t *testing.T) {
 //	if rat.Denominator != 9 {
 //		t.Errorf("Denominator did not reduce! E - 9, A - %d", rat.Denominator)
 //	}
-//    rat.Denominator = 42
-//    t.Errorf(rat.String())
+//	rat.Denominator = 42
+//	t.Errorf(rat.String())
 //}
