@@ -2,36 +2,44 @@ package rational
 
 import "fmt"
 
-// Completely change the representation - tests don't break!
-type Rational [2]int
+type Rational interface {
+    Equal(other Rational) bool
+    String() string
+	Numerator() int
+	Denominator() int
+	Add(other Rational) Rational
+}
 
-const n_i = 0;
-const d_i = 1;
+// ArrayRation implementation
+type ArrayRational [2]int
 
-func New(num int, denom int) *Rational {
+const n_i = 0
+const d_i = 1
+
+func New(num int, denom int) Rational {
 	reduced_denom := gcd(num, denom)
-	return &Rational{num / reduced_denom, denom / reduced_denom}
+	return &ArrayRational{num / reduced_denom, denom / reduced_denom}
 }
 
-func (self *Rational) Numerator() int {
-    return self[n_i]
+func (self *ArrayRational) Numerator() int {
+	return self[n_i]
 }
 
-func (self *Rational) Denominator() int {
-    return self[d_i]
+func (self *ArrayRational) Denominator() int {
+	return self[d_i]
 }
 
-func (self *Rational) String() string {
+func (self *ArrayRational) String() string {
 	return fmt.Sprintf("%d/%d", self[n_i], self[d_i])
 }
 
-func (self *Rational) Equal(other *Rational) bool {
-	return self[n_i] == other[n_i] && self[d_i] == other[d_i]
+func (self *ArrayRational) Equal(other Rational) bool {
+	return self.Numerator() == other.Numerator() && self.Denominator() == other.Denominator()
 }
 
-func (self *Rational) Add(other *Rational) *Rational {
-	new_numerator := self[n_i]*other[d_i] + self[d_i]*other[n_i]
-	new_denominator := self[d_i] * other[d_i]
+func (self *ArrayRational) Add(other Rational) Rational {
+	new_numerator := self.Numerator()*other.Denominator() + self.Denominator()*other.Numerator()
+	new_denominator := self.Denominator() * other.Denominator()
 	return New(new_numerator, new_denominator)
 }
 
