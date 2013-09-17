@@ -10,34 +10,34 @@ type Rational interface {
 	Add(other Rational) Rational
 }
 
-// ArrayRation implementation
-type ArrayRational [2]int
+// ArrayRational implementation
+type arrayRational [2]int
 
 const n_i = 0
 const d_i = 1
 
 func New(num int, denom int) Rational {
 	reduced_denom := gcd(num, denom)
-	return &ArrayRational{num / reduced_denom, denom / reduced_denom}
+	return &arrayRational{num / reduced_denom, denom / reduced_denom}
 }
 
-func (self *ArrayRational) Numerator() int {
+func (self *arrayRational) Numerator() int {
 	return self[n_i]
 }
 
-func (self *ArrayRational) Denominator() int {
+func (self *arrayRational) Denominator() int {
 	return self[d_i]
 }
 
-func (self *ArrayRational) String() string {
+func (self *arrayRational) String() string {
 	return fmt.Sprintf("%d/%d", self[n_i], self[d_i])
 }
 
-func (self *ArrayRational) Equal(other Rational) bool {
+func (self *arrayRational) Equal(other Rational) bool {
 	return self.Numerator() == other.Numerator() && self.Denominator() == other.Denominator()
 }
 
-func (self *ArrayRational) Add(other Rational) Rational {
+func (self *arrayRational) Add(other Rational) Rational {
 	new_numerator := self.Numerator()*other.Denominator() + self.Denominator()*other.Numerator()
 	new_denominator := self.Denominator() * other.Denominator()
 	return New(new_numerator, new_denominator)

@@ -77,21 +77,11 @@ func TestAddWithReduce(t *testing.T) {
 	}
 }
 
-//func TestAddNotUsingPointers(t *testing.T) {
-//	first, second := rational.Rational{1, 2}, rational.Rational{3, 4}
-//    sum := first.Add(second)
-//    t.Errorf(sum.String())
+//func TestTryToCreateConcreteRational(t *testing.T) {
+//	r := rational.arrayRational{1, 2}
 //}
-
-// Can't do this!
-//func TestReassignmentOfValueObj(t *testing.T) {
-//	rat := rational.New(10, 18)
-//	if rat.Numerator != 5 {
-//		t.Errorf("Numerator did not reduce! E - 5, A - %d", rat.Numerator)
-//	}
-//	if rat.Denominator != 9 {
-//		t.Errorf("Denominator did not reduce! E - 9, A - %d", rat.Denominator)
-//	}
-//	rat.Denominator = 42
-//	t.Errorf(rat.String())
+//
+//func TestTryToViolateEncapsulation(t *testing.T) {
+//	r := rational.New(1, 2)
+//	r[0] = 1
 //}
