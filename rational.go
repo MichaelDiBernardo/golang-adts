@@ -10,74 +10,76 @@ type Rational interface {
 	Add(other Rational) Rational
 }
 
-// ArrayRational implementation
-type ArrayRational [2]int
-
-const n_i = 0
-const d_i = 1
-
 const (
 	TypeHintArray = iota
 	TypeHintStruct
 )
 
+// Factory function for rationals.
 func New(num, denom, hint int) Rational {
 	reduced_denom := gcd(num, denom)
 	numerator := num / reduced_denom
 	denominator := denom / reduced_denom
 
 	if hint == TypeHintArray {
-		return &ArrayRational{numerator, denominator}
+		return &arrayRational{numerator, denominator}
 	} else {
-		return &StructRational{numerator, denominator}
+		return &structRational{numerator, denominator}
 	}
 }
 
-func (self *ArrayRational) Numerator() int {
+// v v v FROM HEREON IN, FOR OUR EYES ONLY v v v 
+// arrayRational implementation
+type arrayRational [2]int
+
+const n_i = 0
+const d_i = 1
+
+func (self *arrayRational) Numerator() int {
 	return self[n_i]
 }
 
-func (self *ArrayRational) Denominator() int {
+func (self *arrayRational) Denominator() int {
 	return self[d_i]
 }
 
-func (self *ArrayRational) String() string {
+func (self *arrayRational) String() string {
 	return fmt.Sprintf("%d/%d", self.Numerator(), self.Denominator())
 }
 
-func (self *ArrayRational) Equal(other Rational) bool {
+func (self *arrayRational) Equal(other Rational) bool {
 	return self.Numerator() == other.Numerator() && self.Denominator() == other.Denominator()
 }
 
-func (self *ArrayRational) Add(other Rational) Rational {
+func (self *arrayRational) Add(other Rational) Rational {
 	new_numerator := self.Numerator()*other.Denominator() + self.Denominator()*other.Numerator()
 	new_denominator := self.Denominator() * other.Denominator()
 	return New(new_numerator, new_denominator, TypeHintArray)
 }
 
-// StructRational implementation
-type StructRational struct {
+// structRational implementation
+type structRational struct {
 	numerator   int
 	denominator int
 }
 
-func (self *StructRational) Numerator() int {
+func (self *structRational) Numerator() int {
 	return self.numerator
 }
 
-func (self *StructRational) Denominator() int {
+func (self *structRational) Denominator() int {
 	return self.denominator
 }
 
-func (self *StructRational) String() string {
+func (self *structRational) String() string {
 	return fmt.Sprintf("%d/%d", self.Numerator(), self.Denominator())
 }
 
-func (self *StructRational) Equal(other Rational) bool {
+func (self *structRational) Equal(other Rational) bool {
 	return self.Numerator() == other.Numerator() && self.Denominator() == other.Denominator()
 }
 
-func (self *StructRational) Add(other Rational) Rational {
+func (self *structRational) Add(other Rational) Rational {
 	new_numerator := self.Numerator()*other.Denominator() + self.Denominator()*other.Numerator()
 	new_denominator := self.Denominator() * other.Denominator()
 	return New(new_numerator, new_denominator, TypeHintStruct)
