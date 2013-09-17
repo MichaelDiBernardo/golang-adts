@@ -77,6 +77,11 @@ func TestAddWithReduce(t *testing.T) {
 	}
 }
 
+//func TestBreakAbstraction(t *testing.T) {
+//	r := rational.New(5, 6)
+//    t.Error(r[0])
+//}
+
 //func TestAddNotUsingPointers(t *testing.T) {
 //	first, second := rational.Rational{1, 2}, rational.Rational{3, 4}
 //    sum := first.Add(second)
