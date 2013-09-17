@@ -28,7 +28,7 @@ func New(num, denom, hint int) Rational {
 	}
 }
 
-// v v v FROM HEREON IN, FOR OUR EYES ONLY v v v 
+// v v v FROM HEREON IN, FOR OUR EYES ONLY v v v
 // arrayRational implementation
 type arrayRational [2]int
 
@@ -48,7 +48,7 @@ func (self *arrayRational) String() string {
 }
 
 func (self *arrayRational) Equal(other Rational) bool {
-	return self.Numerator() == other.Numerator() && self.Denominator() == other.Denominator()
+	return genericEqual(self, other)
 }
 
 func (self *arrayRational) Add(other Rational) Rational {
@@ -76,13 +76,18 @@ func (self *structRational) String() string {
 }
 
 func (self *structRational) Equal(other Rational) bool {
-	return self.Numerator() == other.Numerator() && self.Denominator() == other.Denominator()
+	return genericEqual(self, other)
 }
 
 func (self *structRational) Add(other Rational) Rational {
 	new_numerator := self.Numerator()*other.Denominator() + self.Denominator()*other.Numerator()
 	new_denominator := self.Denominator() * other.Denominator()
 	return New(new_numerator, new_denominator, TypeHintStruct)
+}
+
+// Helpers! aka "implementation of procedural abstraction" :)
+func genericEqual(x, y Rational) bool {
+	return x.Numerator() == y.Numerator() && x.Denominator() == y.Denominator()
 }
 
 func gcd(m int, n int) int {
